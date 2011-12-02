@@ -1,17 +1,17 @@
 <?php
  /**
  * Plugin Name: Buddypress Profile Widget for Blogs
- * Version: 1.2.1
+ * Version: 1.2.2
  * Description: Let Blog Admins show all/some of their Buddypress profile fields on their blogs as widget
  * credits: Concept by Bowe(http://bp-tricks.com) and Mercime(http://buddypress.org/developers/mercime)
- * Requires at least: BuddyPress 1.1
- * Tested up to: BuddyPress 1.2.5.2+wpms 3.0.1
+ * Requires at least: BuddyPress 1.5
+ * Tested up to: BuddyPress 1.5.1+WordPress Multisite 3.2.1
  * License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
  * Author: Brajesh Singh
  * Author URI: http://buddydev.com
  * Plugin URI:http://buddydev.com/buddypress/buddypress-profile-widget-for-blogs/
- * Last updated:7th September 2010
- Site Wide Only: true
+ * Last updated:December 2, 2011
+ * Network: true
  */
  
  /***
@@ -27,8 +27,8 @@
  
  class BpDev_BPProfile_Widget extends WP_Widget
  {
- 	function bpdev_bpprofile_widget() {
-		parent::WP_Widget( false, $name = __( 'BP Profile for Blogs', 'bpdev' ) );
+ 	function __construct() {
+		parent::__construct( false, $name = __( 'BP Profile for Blogs', 'bpdev' ) );
 	}
 	function widget($args, $instance) {
 		extract( $args );
@@ -204,7 +204,8 @@ $users=apply_filters("bp_profile_for_users",BpDev_BPProfile_Widget::get_users($u
  function bpdev_register_bpprofile_for_blogs_widgets() {
 	add_action('widgets_init', create_function('', 'return register_widget("BpDev_BPProfile_Widget");') );
 	}
-add_action( 'bp_init', 'bpdev_register_bpprofile_for_blogs_widgets' );
+add_action( 'bp_loaded', 'bpdev_register_bpprofile_for_blogs_widgets' );
+
 function bpdev_serialize_role($roles){
 	$roles['meta_value']=maybe_unserialize($roles['meta_value']);
 return $roles;

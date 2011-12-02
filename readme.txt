@@ -2,9 +2,9 @@
 Contributors:sbrajesh
 Donate link: http://buddydev.com/donate/
 Tags: buddypress,buddypress profile,xprofile, profile widget,buddypress profile widget
-Requires at least: wpmu 2.9+buddypress 1.1
-Tested up to:wordpress multisite 3.0.1 +buddypress 1.2.5.2
-Stable tag: 1.2.1
+Requires at least: WordPress 3.2+BuddyPress 1.5
+Tested up to:WordPress MultiSite 3.2.1 +BuddyPress 1.5.1
+Stable tag: 1.2.2
 
 Buddypress Profile Widget for Blogs is a buddypress plugin which allows blog admins to show their buddypress profile on their blogs.
 == Description ==
@@ -32,6 +32,8 @@ Add the widget "Bp Profile For Blogs" and save the settings in the widget. That'
 = I want to show authors profile instead of admins, Is it possible ? =
 Yes. With version 1.2 You can list  members of any role, please go to the widget section and select a role, by default, It will list admins
 == Changelog == 
+= Version 1.2. =
+* Added support for WordPress 3.2 and BuddyPress 1.5+
 = Version 1.2.1 =
 * Added support for wordpress Multisite 3.0.1
 * added support for listing the profiles of users by role

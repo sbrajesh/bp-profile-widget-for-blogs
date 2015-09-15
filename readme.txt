@@ -1,19 +1,20 @@
 === Buddypress Profile Widget for Blogs ===
-Contributors:sbrajesh
-Donate link: http://buddydev.com/donate/
-Tags: buddypress,buddypress profile,xprofile, profile widget,buddypress profile widget
-Requires at least: WordPress 3.2+BuddyPress 1.5
-Tested up to:WordPress MultiSite 3.2.1 +BuddyPress 1.5.1
-Stable tag: 1.2.2
+Contributors: sbrajesh, buddydev
+Tags: buddypress, buddypress profile, xprofile, profile widget, buddypress profile widget
+Requires at least: BuddyPress 2.0	
+Tested up to: BuddyPress 2.3.3
+Stable tag: 1.2.4
 
-Buddypress Profile Widget for Blogs is a buddypress plugin which allows blog admins to show their buddypress profile on their blogs.
+BuddyPress Profile Widget for Blogs is a BuddyPress plugin which allows blog admins to show their BuddyPress profile on their blogs.
+
 == Description ==
-Buddypress Profile Widget for Blogs is a plugin for buddypress +wpmu based site, which enables blog admins to show their profile on their blogs.
+BuddyPress Profile Widget for Blogs is a plugin for BuddyPress based site, which enables blog admins to show their profile on their blogs.
 
-Features include:
-* Show list of users of current blog by their role(e.g list of admins, list of authors)
-* Show Avatar/Hide avatar
-* Show All xprofile fields/ only selected xprofile fields
+**Features** 
+
+ * Show profile for users of current blog by their role(e.g list of admins, list of authors)
+ * Show Avatar/Hide avatar
+ * Show All xprofile fields/ only selected xprofile fields
 
 == Installation ==
 
@@ -26,21 +27,34 @@ The plugin is simple to install:
 
 Otherwise, Use the Plugin browser, upload it and activate, you are done.
 Please note, The plugin must be activated sitewide.
+
 == Frequently Asked Questions ==
 = How to Use =
-Add the widget "Bp Profile For Blogs" and save the settings in the widget. That's it.
+Add the widget "BP Profile For Blogs" and save the settings in the widget. That's it.
 = I want to show authors profile instead of admins, Is it possible ? =
 Yes. With version 1.2 You can list  members of any role, please go to the widget section and select a role, by default, It will list admins
+
 == Changelog == 
-= Version 1.2. =
+
+= Version 1.2.4 =
+* Code cleanup, fixes all notices
+
+= Version 1.2.3 =
+* Updated for Better performance
+
+= Version 1.2.3 =
+* Updated for Better performance
+
+= Version 1.2.2 =
 * Added support for WordPress 3.2 and BuddyPress 1.5+
+
 = Version 1.2.1 =
-* Added support for wordpress Multisite 3.0.1
+* Added support for WordPress Multisite 3.0.1
 * added support for listing the profiles of users by role
 * Code level support for showing profile for any type of member by ther roles. 
  = Version 1.2 =
 * Fixed a bug with finding admin user by level, now it works on role
-* Buddypress awareness is brought back, so should not cause issue when buddypress is disabled
+* BuddyPress awareness is brought back, so should not cause issue when BuddyPress is disabled
 
  = Version 1.1 =
 * Porfile Fields linking is removed

@@ -1,4 +1,4 @@
-=== Buddypress Profile Widget for Blogs ===
+=== BuddyPress Profile Widget for Blogs ===
 Contributors: sbrajesh, buddydev
 Tags: buddypress, buddypress profile, xprofile, profile widget, buddypress profile widget
 Requires at least: BuddyPress 2.0	

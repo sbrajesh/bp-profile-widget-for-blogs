@@ -1,14 +1,14 @@
-=== BuddyPress Profile Widget for Blogs ===
-Contributors: sbrajesh, buddydev
+=== BuddyPress User Info Widget ===
+Contributors: buddydev, sbrajesh
 Tags: buddypress, buddypress profile, xprofile, profile widget, buddypress profile widget
-Requires at least: BuddyPress 2.0	
-Tested up to: BuddyPress 2.3.3
-Stable tag: 1.2.4
+Requires at least: WordPress 3.0
+Tested up to: WordPress 4.6.1
+Stable tag: 1.2.5
 
-BuddyPress Profile Widget for Blogs is a BuddyPress plugin which allows blog admins to show their BuddyPress profile on their blogs.
+BuddyPress User Info Widget allows easy listing of user profile info in the widget area.
 
 == Description ==
-BuddyPress Profile Widget for Blogs is a plugin for BuddyPress based site, which enables blog admins to show their profile on their blogs.
+BuddyPress User Info Widget( earlier BuddyPress Profile Widget for Blogs ) is a plugin for BuddyPress based site, which enables blog admins to show their profile on their blogs.
 
 **Features** 
 
@@ -30,11 +30,16 @@ Please note, The plugin must be activated sitewide.
 
 == Frequently Asked Questions ==
 = How to Use =
-Add the widget "BP Profile For Blogs" and save the settings in the widget. That's it.
+Add the widget "BuddyPress Profile Info" and save the settings in the widget. That's it.
 = I want to show authors profile instead of admins, Is it possible ? =
 Yes. With version 1.2 You can list  members of any role, please go to the widget section and select a role, by default, It will list admins
-
+= Can I only show the details of logged in member ? =
+Yes. Please select "Logged In User" from the role list in the widget.
 == Changelog == 
+
+= Version 1.2.5 =
+* Allow displaying the details of logged in user
+* Cleanup
 
 = Version 1.2.4 =
 * Code cleanup, fixes all notices

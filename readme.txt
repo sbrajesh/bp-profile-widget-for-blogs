@@ -1,8 +1,8 @@
 === BuddyPress User Info Widget ===
 Contributors: buddydev, sbrajesh
 Tags: buddypress, buddypress profile, xprofile, profile widget, buddypress profile widget
-Requires at least: WordPress 3.0
-Tested up to: WordPress 4.6.1
+Requires at least: 3.0
+Tested up to: 4.6.1
 Stable tag: 1.2.5
 
 BuddyPress User Info Widget allows easy listing of user profile info in the widget area.
@@ -15,6 +15,7 @@ BuddyPress User Info Widget( earlier BuddyPress Profile Widget for Blogs ) is a 
  * Show profile for users of current blog by their role(e.g list of admins, list of authors)
  * Show Avatar/Hide avatar
  * Show All xprofile fields/ only selected xprofile fields
+ Fo more such plugins, please visit [BuddyDev](https://buddydev.com/)
 
 == Installation ==
 

@@ -34,7 +34,12 @@
 	
 	public function widget( $args, $instance ) {
 		extract( $args );
-	
+
+		//do not display widget if it should only show for the logged in user and the user is not logged in
+		if ( isset( $instance['user_role'] ) && $instance['user_role'] == 'loggedin' && ! is_user_logged_in() ) {
+			return ;
+		}
+
 		echo $before_widget; 
 		echo $before_title
 		  . $instance['title']
@@ -72,7 +77,14 @@
 
 		<p><label for="bpdev-widget-title"><?php _e('Title:', 'bpdev'); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( stripslashes( $title ) ); ?>" /></label></p>
 
-                <p><label for="bpdev-widget-role"><?php _e('List profiles for:', 'bpdev'); ?> <select  id="<?php echo $this->get_field_id( 'user_role' ); ?>" name="<?php echo $this->get_field_name( 'user_role' ); ?>" ><?php wp_dropdown_roles($user_role);?> </select></label></p>
+                <p><label for="bpdev-widget-role">
+		                <?php _e('List profiles for:', 'bpdev'); ?>
+		                <select  id="<?php echo $this->get_field_id( 'user_role' ); ?>" name="<?php echo $this->get_field_name( 'user_role' ); ?>" >
+			                <?php wp_dropdown_roles( $user_role ); ?>
+			                <option value="loggedin" <?php selected( $user_role, 'loggedin' ); ?>><?php _e( 'Logged In User', 'bp-profile-widget-for-blogs' ); ?></option>
+		                </select>
+	                </label>
+                </p>
 		
 
                 <p>
@@ -133,8 +145,12 @@
 		unset( $instance['title'] );//unset the title of the widget,because we will be iterating over the instance fields
 		unset( $instance['user_role'] );//unset the title of the widget,because we will be iterating over the instance fields
 
+		if ( $user_role == 'loggedin' ) {
+			$users = array( get_current_user_id() );
+		} else {
+			$users = apply_filters( 'bp_blog_profile_for_users', self::get_users( $user_role ) );//may be we can improve it too
+		}
 
-		$users = apply_filters( 'bp_blog_profile_for_users', self::get_users( $user_role ) );//may be we can improve it too
 
 		if( empty( $users ) ) {
 			return;

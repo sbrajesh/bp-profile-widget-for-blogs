@@ -1,11 +1,9 @@
 <?php
 /**
  * Plugin Name: BuddyPress User Info Widget
- * Version: 1.2.5
+ * Version: 1.2.6
  * Description: Let Blog Admins show all/some of their BuddyPress profile fields on their blogs as widget
  * Credits: Concept by Bowe(http://bp-tricks.com) and Mercime(http://buddypress.org/developers/mercime)
- * Requires at least: BuddyPress 1.5
- * Tested up to: BuddyPress 2.7.2
  * License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
  * Author: Brajesh Singh( BuddyDev.com )
  * Author URI: https://buddydev.com
@@ -182,9 +180,7 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 
 							$fld_name = bp_get_the_profile_field_input_name();
 							if ( array_key_exists( $fld_name, $instance ) && $instance[ $fld_name ] == 'yes' ) {
-								$op .= '<tr><td>' . bp_get_the_profile_field_name() . '</td><td>' . bp_get_profile_field_data( array( 'field'   => bp_get_the_profile_field_id(),
-								                                                                                                      'user_id' => $user_id
-									) ) . '</td></tr>';
+								$op .= '<tr><td>' . bp_get_the_profile_field_name() . '</td><td>' .xprofile_get_field_data( bp_get_the_profile_field_id(),$user_id, 'comma' ) . '</td></tr>';
 							}
 						endwhile;
 					endwhile;

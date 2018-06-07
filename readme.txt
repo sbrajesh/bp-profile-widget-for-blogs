@@ -41,7 +41,7 @@ Yes. Please select "Logged In User" from the role list in the widget.
 
 == Changelog == 
 
-= Version 1.2.6 =
+= Version 1.2.7 =
 * Added option to show the profile data for displayed user only.
 
 = Version 1.2.6 =

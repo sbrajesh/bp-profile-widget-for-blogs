@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: BuddyPress User Info Widget
- * Version: 1.2.6
+ * Version: 1.2.7
  * Description: Let Blog Admins show all/some of their BuddyPress profile fields on their blogs as widget
  * Credits: Concept by Bowe(http://bp-tricks.com) and Mercime(http://buddypress.org/developers/mercime)
  * License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
@@ -81,6 +81,7 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 				        name="<?php echo $this->get_field_name( 'user_role' ); ?>">
 					<?php wp_dropdown_roles( $user_role ); ?>
 					<option value="loggedin" <?php selected( $user_role, 'loggedin' ); ?>><?php _e( 'Logged In User', 'bp-profile-widget-for-blogs' ); ?></option>
+					<option value="displayed" <?php selected( $user_role, 'displayed' ); ?>><?php _e( 'Displayed User', 'bp-profile-widget-for-blogs' ); ?></option>
 				</select>
 			</label>
 		</p>
@@ -146,8 +147,14 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 		unset( $instance['title'] );//unset the title of the widget,because we will be iterating over the instance fields
 		unset( $instance['user_role'] );//unset the title of the widget,because we will be iterating over the instance fields
 
+        $users = array();
+
 		if ( $user_role == 'loggedin' ) {
-			$users = array( get_current_user_id() );
+			$users[] = get_current_user_id();
+		} elseif ( $user_role == 'displayed' ) {
+			if ( bp_is_user() ) {
+				$users[] = bp_displayed_user_id();
+			}
 		} else {
 			$users = apply_filters( 'bp_blog_profile_for_users', self::get_users( $user_role ) );//may be we can improve it too
 		}

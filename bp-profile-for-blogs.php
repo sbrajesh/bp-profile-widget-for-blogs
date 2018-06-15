@@ -31,13 +31,36 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 		extract( $args );
 
 		//do not display widget if it should only show for the logged in user and the user is not logged in
-		if ( isset( $instance['user_role'] ) && $instance['user_role'] == 'loggedin' && ! is_user_logged_in() ) {
+
+		$role = isset( $instance['user_role'] ) ? $instance['user_role'] : '';
+		if ( 'loggedin' === $role && ! is_user_logged_in() ) {
+			return;
+		} elseif ( 'displayed' == $role && ! bp_is_user() ) {
 			return;
 		}
 
+		$user_id = 0;
+
+		if ( 'loggedin' == $role ) {
+			$user_id = get_current_user_id();
+		} elseif ( 'displayed' == $role ) {
+			$user_id = bp_displayed_user_id();
+		}
+
+		$title = $instance['title'];
+		if ( $user_id ) {
+			$user = get_user_by( 'id', $user_id );
+			$title = str_replace( array( '%username%', '%display_name%', '%first_name%' ), array(
+				$user->user_login,
+				$user->display_name,
+				$user->first_name
+			), $title );
+		}
+
+
 		echo $before_widget;
 		echo $before_title
-		     . $instance['title']
+		     . wp_kses_data( $title )
 		     . $after_title;
 
 		self::show_blog_profile( $instance );

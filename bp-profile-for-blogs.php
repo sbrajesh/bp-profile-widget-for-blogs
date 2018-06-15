@@ -1,14 +1,13 @@
 <?php
 /**
  * Plugin Name: BuddyPress User Info Widget
- * Version: 1.2.7
+ * Version: 1.2.8
  * Description: Let Blog Admins show all/some of their BuddyPress profile fields on their blogs as widget
  * Credits: Concept by Bowe(http://bp-tricks.com) and Mercime(http://buddypress.org/developers/mercime)
  * License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
  * Author: Brajesh Singh( BuddyDev.com )
  * Author URI: https://buddydev.com
  * Plugin URI:https://buddydev.com/buddypress/buddypress-profile-widget-for-blogs/
- * Network: true
  */
 
 /***

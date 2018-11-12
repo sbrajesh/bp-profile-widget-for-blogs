@@ -2,8 +2,8 @@
 Contributors: buddydev, sbrajesh
 Tags: buddypress, buddypress profile, xprofile, profile widget, buddypress profile widget
 Requires at least: 3.0
-Tested up to: 4.9.6
-Stable tag: 1.2.8
+Tested up to: 4.9.8
+Stable tag: 1.2.9
 
 BuddyPress User Info Widget allows easy listing of user profile info in the widget area.
 
@@ -40,6 +40,8 @@ Yes. With version 1.2 You can list  members of any role, please go to the widget
 Yes. Please select "Logged In User" from the role list in the widget.
 
 == Changelog ==
+= Version 1.2.9 =
+* Do not hide member type associated profile fields in widget settings.
 
 = Version 1.2.8 =
 * Allow using tags in widget title ( %username%, %first_name%, %display_name%).

@@ -122,7 +122,7 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 		<h3><?php _e( 'Profile Fields Visibility', 'bp-profile-widget-for-blogs' ); ?></h3>
 		<table>
 
-			<?php if ( function_exists( 'bp_has_profile' ) ) : if ( bp_has_profile() ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
+			<?php if ( function_exists( 'bp_has_profile' ) ) : if ( bp_has_profile( array( 'member_type'=> false, 'fetch_field_data'=> false, 'fetch_visibility_level'=> false, )) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
 				<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
 					<?php $fld_name = bp_get_the_profile_field_input_name();

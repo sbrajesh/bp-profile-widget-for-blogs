@@ -19,36 +19,41 @@
  *
  * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses>.
  */
-
 class BPDev_BPProfile_Widget extends WP_Widget {
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		parent::__construct( false, $name = __( 'BuddyPress User Info', 'bp-profile-widget-for-blogs' ) );
 	}
 
+	/**
+	 * Display.
+	 *
+	 * @param array $args widget args.
+	 * @param array $instance instance.
+	 */
 	public function widget( $args, $instance ) {
-		extract( $args );
-
-		//do not display widget if it should only show for the logged in user and the user is not logged in
-
+		// do not display widget if it should only show for the logged in user and the user is not logged in.
 		$role = isset( $instance['user_role'] ) ? $instance['user_role'] : '';
 		if ( 'loggedin' === $role && ! is_user_logged_in() ) {
 			return;
-		} elseif ( 'displayed' == $role && ! bp_is_user() ) {
+		} elseif ( 'displayed' === $role && ! bp_is_user() ) {
 			return;
 		}
 
 		$user_id = 0;
 
-		if ( 'loggedin' == $role ) {
+		if ( 'loggedin' === $role ) {
 			$user_id = get_current_user_id();
-		} elseif ( 'displayed' == $role ) {
+		} elseif ( 'displayed' === $role ) {
 			$user_id = bp_displayed_user_id();
 		}
 
 		$title = $instance['title'];
 		if ( $user_id ) {
-			$user = get_user_by( 'id', $user_id );
+			$user  = get_user_by( 'id', $user_id );
 			$title = str_replace( array( '%username%', '%display_name%', '%first_name%' ), array(
 				$user->user_login,
 				$user->display_name,
@@ -57,36 +62,50 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 		}
 
 
-		echo $before_widget;
-		echo $before_title
+		echo $args['before_widget'];
+		echo $args['before_title']
 		     . wp_kses_data( $title )
-		     . $after_title;
+		     . $args['after_title'];
 
 		self::show_blog_profile( $instance );
-		echo $after_widget;
+		echo $args['after_widget'];
 	}
 
+	/**
+	 * Update widget.
+	 *
+	 * @param array $new_instance new settings.
+	 * @param array $old_instance old settings.
+	 *
+	 * @return array
+	 */
 	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
 
 		foreach ( $new_instance as $key => $val ) {
-			$instance[ $key ] = $val;//update the instance
+			$instance[ $key ] = $val;// update the instance.
 		}
 
 		return $instance;
 	}
 
+	/**
+	 * Display form.
+	 *
+	 * @param array $instance widget instance.
+	 *
+	 * @return string|void
+	 */
 	public function form( $instance ) {
 
 		$instance = wp_parse_args( (array) $instance, array(
 			'title'       => __( 'My Profile', 'bp-profile-widget-for-blogs' ),
 			'show_avatar' => 'yes',
-			'user_role'   => 'administrator'
+			'user_role'   => 'administrator',
 		) );
 
-		$title = strip_tags( $instance['title'] );
-		extract( $instance, EXTR_SKIP );
+		$title = wp_strip_all_tags( $instance['title'] );
 
 		?>
 
@@ -101,9 +120,9 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 				<?php _e( 'List profiles for:', 'bp-profile-widget-for-blogs' ); ?>
 				<select id="<?php echo $this->get_field_id( 'user_role' ); ?>"
 				        name="<?php echo $this->get_field_name( 'user_role' ); ?>">
-					<?php wp_dropdown_roles( $user_role ); ?>
-					<option value="loggedin" <?php selected( $user_role, 'loggedin' ); ?>><?php _e( 'Logged In User', 'bp-profile-widget-for-blogs' ); ?></option>
-					<option value="displayed" <?php selected( $user_role, 'displayed' ); ?>><?php _e( 'Displayed User', 'bp-profile-widget-for-blogs' ); ?></option>
+					<?php wp_dropdown_roles( $instance['user_role'] ); ?>
+					<option value="loggedin" <?php selected( $instance['user_role'], 'loggedin' ); ?>><?php _e( 'Logged In User', 'bp-profile-widget-for-blogs' ); ?></option>
+					<option value="displayed" <?php selected( $instance['user_role'], 'displayed' ); ?>><?php _e( 'Displayed User', 'bp-profile-widget-for-blogs' ); ?></option>
 				</select>
 			</label>
 		</p>
@@ -111,23 +130,29 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 
 		<p>
 			<label for="bpdev-widget-show-avatar"><?php _e( 'Show Avatar', 'bp-profile-widget-for-blogs' ); ?>
-				<input type="radio" id="<?php echo $this->get_field_id( 'show_avatar' ); ?>" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" value="yes" <?php checked( $show_avatar, 'yes' ); ?> >Yes
-				<input type="radio" id="<?php echo $this->get_field_id( 'show_avatar' ); ?>" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" value="no" <?php checked( $show_avatar, 'no' ); ?>>No
+				<input type="radio" id="<?php echo $this->get_field_id( 'show_avatar' ); ?>" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" value="yes" <?php checked( $instance['show_avatar'], 'yes' ); ?> >Yes
+				<input type="radio" id="<?php echo $this->get_field_id( 'show_avatar' ); ?>" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" value="no" <?php checked( $instance['show_avatar'], 'no' ); ?>>No
 			</label>
 		</p>
 		<?php
-		//get all xprofile fields and ask user whether to show them or not
-
+		// get all xprofile fields and ask user whether to show them or not.
 		?>
 		<h3><?php _e( 'Profile Fields Visibility', 'bp-profile-widget-for-blogs' ); ?></h3>
 		<table>
 
-			<?php if ( function_exists( 'bp_has_profile' ) ) : if ( bp_has_profile( array( 'member_type'=> false, 'fetch_field_data'=> false, 'fetch_visibility_level'=> false, )) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
-				<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+			<?php
+            if ( function_exists( 'bp_has_profile' ) ) :
+				if ( bp_has_profile( array(
+					'member_type'            => false,
+				) ) ) :
+                    while ( bp_profile_groups() ) :
+                        bp_the_profile_group(); ?>
+					    <?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
-					<?php $fld_name = bp_get_the_profile_field_input_name();
-						$fld_val        = isset( ${$fld_name} ) ? ${$fld_name} : 'yes';
-					?>
+	                    <?php
+	                    $fld_name       = bp_get_the_profile_field_input_name();
+	                    $fld_val        = isset( $instance[ $fld_name ] ) ? $instance[ $fld_name ] : 'yes';
+	                    ?>
 					<tr>
 						<td>
 							<label for="<?php echo $fld_name; ?>"><?php bp_the_profile_field_name() ?></label>
@@ -141,33 +166,53 @@ class BPDev_BPProfile_Widget extends WP_Widget {
 				<?php endwhile;
 			endwhile;
 			endif;
-			endif; ?>
+			endif;
+			?>
 		</table>
 
 		<?php
 	}
 
+	/**
+	 * Get user by role.
+	 *
+	 * @param string $user_role user role.
+	 *
+	 * @return array
+	 */
 	public static function get_users( $user_role = null ) {
-
-		$users = get_users( array( 'role' => $user_role, 'blog_id' => get_current_blog_id(), 'fields' => 'ID' ) );
+		$users = get_users( array(
+			'role'    => $user_role,
+			'blog_id' => get_current_blog_id(),
+			'fields'  => 'ID',
+		) );
 
 		return $users;
 	}
 
-
+	/**
+	 * Show profile.
+	 *
+	 * @param array $instance instance.
+	 */
 	public static function show_blog_profile( $instance ) {
 
-		//if buddypress is not active, return
+		// if buddypress is not active, return.
 		if ( ! function_exists( 'buddypress' ) ) {
 			return;
 		}
 
-		$show_avatar = $instance['show_avatar'];//we need to preserve for multi admin
+		$show_avatar = $instance['show_avatar'];// we need to preserve for multi admin.
 		$user_role   = $instance['user_role'];
 
 		unset( $instance['show_avatar'] );
-		unset( $instance['title'] );//unset the title of the widget,because we will be iterating over the instance fields
-		unset( $instance['user_role'] );//unset the title of the widget,because we will be iterating over the instance fields
+
+		// unset the title of the widget
+        // because we will be iterating over the instance fields.
+		unset( $instance['title'] );
+		// unset the title of the widget,
+        // because we will be iterating over the instance fields.
+		unset( $instance['user_role'] );
 
         $users = array();
 
